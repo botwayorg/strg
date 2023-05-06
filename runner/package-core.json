@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start": "npx turbo run start --parallel"
+  },
+  "workspaces": ["runner", "runner/cmd"]
+}
