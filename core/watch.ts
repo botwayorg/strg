@@ -10,32 +10,12 @@ const work = (db: string) => {
     persistent: true,
   });
 
-  const watch = () => {
+  watcher.on("all", () => {
     shelljs
       .cd(join(HOMEDIR, "." + db))
       .exec("git add .")
       .exec(`git commit -m "New Change"`)
       .exec(`git push -u origin main`);
-  };
-
-  watcher.on("add", () => {
-    watch();
-  });
-
-  watcher.on("addDir", () => {
-    watch();
-  });
-
-  watcher.on("change", () => {
-    watch();
-  });
-
-  watcher.on("unlink", () => {
-    watch();
-  });
-
-  watcher.on("unlinkDir", () => {
-    watch();
   });
 
   console.log(`Changes Saved`);
