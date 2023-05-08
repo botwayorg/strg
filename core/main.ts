@@ -1,7 +1,9 @@
+#! /usr/bin/env node
+
 import * as figlet from "figlet";
-import * as shelljs from "shelljs";
 import { Command } from "commander";
-import { mkdir } from "fs";
+import { Init } from "./init";
+import { Watch } from "./watch";
 
 const program = new Command();
 
@@ -15,42 +17,16 @@ program
   .option("-s, --sync [db]", "Sync Database files")
   .parse(process.argv);
 
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}
+
 const options = program.opts();
 
 if (options.init) {
-  shelljs
-    .exec(`git config --global user.name "Botway App"`)
-    .exec(
-      `git config --global user.email "132448299+botway-app@users.noreply.github.com"`
-    )
-    .exec(
-      `wget https://raw.githubusercontent.com/botwayorg/strg/main/package-core.json -o package.json`
-    )
-    .exec(
-      `wget https://raw.githubusercontent.com/botwayorg/strg/main/turbo.json`
-    );
+  Init();
+}
 
-  mkdir("./runner", (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(`Directory 'runner' created successfully!`);
-
-      shelljs.exec(
-        "wget https://raw.githubusercontent.com/botwayorg/strg/main/runner/package.json -o ./runner/package.json"
-      );
-
-      mkdir("./runner/cmd", (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(`Directory 'runner/cmd' created successfully!`);
-
-          shelljs.exec(
-            "wget https://raw.githubusercontent.com/botwayorg/strg/main/runner/cmd/package.json -o ./runner/cmd/package.json"
-          );
-        }
-      });
-    }
-  });
+if (options.sync) {
+  Watch(options.sync);
 }
