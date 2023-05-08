@@ -57,7 +57,7 @@ export const CheckDir = async (db: string) => {
       });
     } else {
       shelljs.exec(
-        `git clone https://github.com/${ghu.login}/${"." + db} ${join(
+        `npx gh-cmd repo clone https://github.com/${ghu.login}/${"." + db} ${join(
           HOMEDIR,
           "." + db
         )}`
