@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx tsc",
-    "prepublish": "pnpm build &&"
+    "prepublish": "pnpm build"
   },
   "bin": {
     "strg": "./bin/main.js"
