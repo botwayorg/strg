@@ -14,9 +14,7 @@ export const Init = () => {
     if (err) {
       console.error(err);
     } else {
-      console.log(
-        `Directory 'runner' created successfully!`
-      );
+      console.log(`Directory 'runner' created successfully!`);
 
       shelljs.exec(
         "wget https://raw.githubusercontent.com/botwayorg/strg/main/runner/package.json -O ./runner/package.json"
@@ -26,9 +24,7 @@ export const Init = () => {
         if (err) {
           console.error(err);
         } else {
-          console.log(
-            `Directory 'runner/cmd' created successfully!`
-          );
+          console.log(`Directory 'runner/cmd' created successfully!`);
 
           shelljs.exec(
             "wget https://raw.githubusercontent.com/botwayorg/strg/main/runner/cmd/package.json -O ./runner/cmd/package.json"
@@ -37,4 +33,6 @@ export const Init = () => {
       });
     }
   });
+
+  shelljs.exec("npm i");
 };
