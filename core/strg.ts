@@ -27,9 +27,7 @@ export const CheckDir = async (db: string) => {
     .exec(
       `git config --global user.email "${ghu.id}+${ghu.login}@users.noreply.github.com"`
     )
-    .exec(
-      `git config --global init.defaultBranch main`
-    );
+    .exec(`git config --global init.defaultBranch main`);
 
   if (!check) {
     if (repo.includes("Not Found")) {
@@ -39,16 +37,7 @@ export const CheckDir = async (db: string) => {
         } else {
           console.log(`Directory '~/.${db}' created successfully!`);
 
-          shelljs
-            .cd(join(HOMEDIR, "." + db))
-            .exec("git init");
-
-          shelljs.exec(
-            `npx gh-cmd repo create ${"." + db} --private --source ${join(
-              HOMEDIR,
-              "." + db
-            )}`
-          );
+          shelljs.exec(`npx gh-cmd repo create ${"." + db} --private --clone`);
 
           console.log(`Created on GitHub`);
 
@@ -57,10 +46,7 @@ export const CheckDir = async (db: string) => {
       });
     } else {
       shelljs.exec(
-        `npx gh-cmd repo clone ${"." + db} ${join(
-          HOMEDIR,
-          "." + db
-        )}`
+        `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
       );
 
       console.log(`Cloned Successfully`);
