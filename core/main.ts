@@ -20,6 +20,7 @@ program
   .option("-i, --init", "Setup")
   .option("-c, --check [db]", "Check DB Dir")
   .option("-s, --sync [db]", "Sync Database files")
+  .option("-r, --remove [db]", "Remove Database files")
   .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
@@ -36,8 +37,10 @@ if (options.check) {
   CheckDir(options.check, true);
 }
 
-if (options.sync) {
-  removeSync(join(HOMEDIR, "." + options.sync));
+if (options.remove) {
+  removeSync(join(HOMEDIR, "." + options.remove));
+}
 
+if (options.sync) {
   Watch(options.sync);
 }

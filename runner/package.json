@@ -1,6 +1,8 @@
 {
   "name": "strg-runner",
   "scripts": {
-    "start": "npx @botway/strg --sync $DB"
+    "start": "npm run remove && npm run cmd",
+    "cmd": "strg --sync $DB",
+    "remove": "strg --remove $DB"
   }
 }
