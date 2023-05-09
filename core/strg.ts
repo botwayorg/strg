@@ -5,7 +5,7 @@ import { HOMEDIR } from "./constants";
 import { Watch } from "./watch";
 import axios from "axios";
 
-export const CheckDir = async (db: string) => {
+export const CheckDir = async (db: string, noWatch: boolean) => {
   console.log("Checking Directory...");
 
   const ghu = (
@@ -42,7 +42,9 @@ export const CheckDir = async (db: string) => {
 
           console.log(`Created on GitHub`);
 
-          Watch(db);
+          if (!noWatch) {
+            Watch(db);
+          }
         }
       });
     } else {
@@ -52,11 +54,15 @@ export const CheckDir = async (db: string) => {
 
       console.log(`Cloned Successfully`);
 
-      Watch(db);
+      if (!noWatch) {
+        Watch(db);
+      }
     }
   } else {
     console.log(`Directory found`);
 
-    Watch(db);
+    if (!noWatch) {
+      Watch(db);
+    }
   }
 };

@@ -27,7 +27,7 @@ export const Watch = (db: string) => {
   if (check) {
     work(db);
   } else {
-    CheckDir(db);
+    CheckDir(db, false);
 
     work(db);
   }

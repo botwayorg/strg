@@ -30,7 +30,7 @@ if (options.init) {
 }
 
 if (options.check) {
-  CheckDir(options.sync);
+  CheckDir(options.sync, true);
 }
 
 if (options.sync) {
