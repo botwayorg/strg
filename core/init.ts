@@ -33,6 +33,4 @@ export const Init = () => {
       });
     }
   });
-
-  shelljs.exec("npm i");
 };
