@@ -39,7 +39,10 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
         } else {
           console.log(`Directory '~/.${db}' created successfully!`);
 
-          shelljs.exec(`npx gh-cmd repo create ${"." + db} --private --clone`);
+          shelljs.exec(`npx gh-cmd repo create ${"." + db} --private`);
+          shelljs.exec(
+            `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
+          );
 
           console.log(`Created on GitHub`);
 

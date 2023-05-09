@@ -1,16 +1,10 @@
 import * as shelljs from "shelljs";
-import * as chokidar from "chokidar";
 import { HOMEDIR } from "./constants";
 import { join } from "path";
-import { existsSync } from "fs";
-import { CheckDir } from "./strg";
+import { watch } from "fs";
 
 const work = (db: string) => {
-  const watcher = chokidar.watch(join(HOMEDIR, "." + db), {
-    persistent: true,
-  });
-
-  watcher.on("all", () => {
+  const cmd = () =>
     shelljs
       .cd(join(HOMEDIR, "." + db))
       .exec("git add .")
@@ -18,27 +12,14 @@ const work = (db: string) => {
       .exec("git pull")
       .exec(`git push -u origin main`)
       .exec(`git push`);
-  });
+
+  watch(join(HOMEDIR, "." + db), () => cmd());
 
   console.log(`Changes Saved`);
 };
 
 export const Watch = (db: string) => {
-  let check = existsSync(join(HOMEDIR, "." + db));
+  shelljs.cd(join(HOMEDIR, "." + db)).exec("git pull");
 
-  if (check) {
-    CheckDir(db, false);
-
-    shelljs
-      .cd(join(HOMEDIR, "." + db))
-      .exec("git pull");
-
-    work(db);
-  } else {
-    shelljs
-      .cd(join(HOMEDIR, "." + db))
-      .exec("git pull");
-
-    work(db);
-  }
+  work(db);
 };

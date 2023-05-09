@@ -7,7 +7,7 @@ export const Init = () => {
       `wget https://raw.githubusercontent.com/botwayorg/strg/main/runner/package-core.json -O package.json`
     )
     .exec(
-      `wget https://raw.githubusercontent.com/botwayorg/strg/main/turbo.json`
+      `wget https://raw.githubusercontent.com/botwayorg/strg/main/turbo-file.json -O turbo.json`
     );
 
   mkdir("./runner", (err) => {
