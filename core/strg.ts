@@ -59,6 +59,8 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
       }
     }
   } else {
+    shelljs.cd(join(HOMEDIR, "." + db)).exec(`git pull`);
+
     console.log(`Directory found`);
 
     if (!noWatch) {
