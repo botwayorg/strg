@@ -23,6 +23,7 @@ export const CheckDir = async (db: string) => {
   let check = existsSync(join(HOMEDIR, "." + db));
 
   shelljs
+    .exec(`npx gh-cmd auth setup-git`)
     .exec(`git config --global user.name "${ghu.name}"`)
     .exec(
       `git config --global user.email "${ghu.id}+${ghu.login}@users.noreply.github.com"`
