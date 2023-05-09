@@ -13,7 +13,7 @@ const work = (db: string) => {
   watcher.on("all", () => {
     shelljs
       .cd(join(HOMEDIR, "." + db))
-      .exec("git pull")
+      // .exec("git pull")
       .exec("git add .")
       .exec(`git commit -m "New Change"`)
       .exec(`git push -u origin main`);
