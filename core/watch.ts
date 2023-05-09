@@ -4,11 +4,8 @@ import { HOMEDIR } from "./constants";
 import { join } from "path";
 import { existsSync } from "fs";
 import { CheckDir } from "./strg";
-import { removeSync } from "fs-extra";
 
 const work = (db: string) => {
-  removeSync(join(HOMEDIR, "." + db));
-
   const watcher = chokidar.watch(join(HOMEDIR, "." + db), {
     persistent: true,
   });

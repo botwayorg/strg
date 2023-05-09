@@ -5,6 +5,9 @@ import { Command } from "commander";
 import { Init } from "./init";
 import { Watch } from "./watch";
 import { CheckDir } from "./strg";
+import { removeSync } from "fs-extra";
+import { HOMEDIR } from "./constants";
+import { join } from "path";
 
 const program = new Command();
 
@@ -34,5 +37,7 @@ if (options.check) {
 }
 
 if (options.sync) {
+  removeSync(join(HOMEDIR, "." + options.sync));
+
   Watch(options.sync);
 }
