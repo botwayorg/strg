@@ -13,10 +13,11 @@ const work = (db: string) => {
   watcher.on("all", () => {
     shelljs
       .cd(join(HOMEDIR, "." + db))
-      // .exec("git pull")
       .exec("git add .")
       .exec(`git commit -m "New Change"`)
-      .exec(`git push -u origin main`);
+      .exec("git pull")
+      .exec(`git push -u origin main`)
+      .exec(`git push`);
   });
 
   console.log(`Changes Saved`);
@@ -28,9 +29,15 @@ export const Watch = (db: string) => {
   if (check) {
     CheckDir(db, false);
 
+    shelljs
+      .cd(join(HOMEDIR, "." + db))
+      .exec("git pull");
+
     work(db);
   } else {
-    CheckDir(db, false);
+    shelljs
+      .cd(join(HOMEDIR, "." + db))
+      .exec("git pull");
 
     work(db);
   }

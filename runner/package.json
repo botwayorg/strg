@@ -1,8 +1,6 @@
 {
   "name": "strg-runner",
   "scripts": {
-    "start": "npm run remove && npm run cmd",
-    "cmd": "strg --sync $DB",
-    "remove": "strg --remove $DB"
+    "start": "strg --sync $DB"
   }
 }

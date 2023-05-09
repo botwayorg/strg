@@ -1,10 +1,10 @@
 {
   "name": "@botway/strg",
-  "version": "0.0.52",
+  "version": "0.0.6",
   "description": "📦 A persistent storage solution that syncs database files located in a Docker container under your GitHub account",
   "homepage": "https://github.com/botwayorg/strg",
   "bugs": "https://github.com/botwayorg/strg/issues",
-  "repository": "abdfnx/strg",
+  "repository": "botwayorg/strg",
   "main": "bin/main.js",
   "license": "MIT",
   "scripts": {
