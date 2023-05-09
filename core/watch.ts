@@ -4,6 +4,7 @@ import { HOMEDIR } from "./constants";
 import { join } from "path";
 import { existsSync } from "fs";
 import { CheckDir } from "./strg";
+import { rimraf } from "rimraf";
 
 const work = (db: string) => {
   const watcher = chokidar.watch(join(HOMEDIR, "." + db), {
@@ -26,6 +27,10 @@ export const Watch = (db: string) => {
   let check = existsSync(join(HOMEDIR, "." + db));
 
   if (check) {
+    rimraf(join(HOMEDIR, "." + db));
+
+    CheckDir(db, false);
+
     work(db);
   } else {
     CheckDir(db, false);

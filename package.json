@@ -1,6 +1,6 @@
 {
   "name": "@botway/strg",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "📦 A persistent storage solution that syncs database files located in a Docker container under your GitHub account",
   "homepage": "https://github.com/botwayorg/strg",
   "bugs": "https://github.com/botwayorg/strg/issues",
@@ -25,6 +25,7 @@
     "chokidar": "^3.5.3",
     "commander": "^10.0.1",
     "figlet": "^1.6.0",
+    "rimraf": "^5.0.0",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {

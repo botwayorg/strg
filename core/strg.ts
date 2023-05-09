@@ -28,7 +28,8 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
     .exec(
       `git config --global user.email "${ghu.id}+${ghu.login}@users.noreply.github.com"`
     )
-    .exec(`git config --global init.defaultBranch main`);
+    .exec(`git config --global init.defaultBranch main`)
+    .exec(`git config --global pull.ff only`);
 
   if (!check) {
     if (repo.includes("Not Found")) {
