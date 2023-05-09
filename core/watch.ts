@@ -7,6 +7,8 @@ import { CheckDir } from "./strg";
 import { removeSync } from "fs-extra";
 
 const work = (db: string) => {
+  removeSync(join(HOMEDIR, "." + db));
+
   const watcher = chokidar.watch(join(HOMEDIR, "." + db), {
     persistent: true,
   });
@@ -27,8 +29,6 @@ export const Watch = (db: string) => {
   let check = existsSync(join(HOMEDIR, "." + db));
 
   if (check) {
-    removeSync(join(HOMEDIR, "." + db));
-
     CheckDir(db, false);
 
     work(db);
