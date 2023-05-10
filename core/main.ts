@@ -42,5 +42,5 @@ if (options.remove) {
 }
 
 if (options.sync) {
-  Watch(options.sync);
+  CheckDir(options.check, false);
 }
