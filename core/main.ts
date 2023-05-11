@@ -3,7 +3,6 @@
 import * as figlet from "figlet";
 import { Command } from "commander";
 import { Init } from "./init";
-import { Watch } from "./watch";
 import { CheckDir } from "./strg";
 import { removeSync } from "fs-extra";
 import { HOMEDIR } from "./constants";
@@ -42,5 +41,5 @@ if (options.remove) {
 }
 
 if (options.sync) {
-  CheckDir(options.check, false);
+  CheckDir(options.sync, false);
 }
