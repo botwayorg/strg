@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "declaration": true,
-    "outDir": "./bin",
-    "strict": true
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "outDir": "bin",
+    "rootDirs": ["core"],
+    "strict": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "lib": ["es2017", "dom"],
+    "sourceMap": true,
+    "skipLibCheck": true
   },
-  "include": ["core"],
+  "include": ["core/**/*"],
   "exclude": ["node_modules"]
 }

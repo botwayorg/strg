@@ -2,10 +2,11 @@ import * as shelljs from "shelljs";
 import { existsSync, mkdir } from "fs";
 import { join } from "path";
 import { HOMEDIR } from "./constants";
-import { Watch } from "./watch";
 import axios from "axios";
 
-export const CheckDir = async (db: string, noWatch: boolean) => {
+export const CheckDir = async () => {
+  const db = process.env.DB!;
+
   console.log("Checking Directory...");
 
   const ghu = (
@@ -17,7 +18,7 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
   ).data;
 
   const repo = shelljs
-    .exec(`npx gh-cmd api repos/${ghu.login}/${"." + db}`)
+    .exec(`npx gh-cmd api repos/${ghu.login}/${"." + db}`, { silent: true })
     .toString();
 
   let check = existsSync(join(HOMEDIR, "." + db));
@@ -45,10 +46,6 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
           );
 
           console.log(`Created on GitHub`);
-
-          if (!noWatch) {
-            Watch(db);
-          }
         }
       });
     } else {
@@ -57,18 +54,10 @@ export const CheckDir = async (db: string, noWatch: boolean) => {
       );
 
       console.log(`Cloned Successfully`);
-
-      if (!noWatch) {
-        Watch(db);
-      }
     }
   } else {
     shelljs.cd(join(HOMEDIR, "." + db)).exec(`git pull`);
 
     console.log(`Directory found`);
-
-    if (!noWatch) {
-      Watch(db);
-    }
   }
 };

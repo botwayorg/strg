@@ -1,6 +1,0 @@
-{
-  "name": "strg-runner",
-  "scripts": {
-    "start": "strg --sync $DB"
-  }
-}

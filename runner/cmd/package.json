@@ -1,9 +1,0 @@
-{
-  "name": "strg-cmd",
-  "scripts": {
-    "start": "npm run remove && npm run check && npm run cmd",
-    "cmd": "$CMD",
-    "check": "strg --check ${DB}",
-    "remove": "strg --remove $DB"
-  }
-}

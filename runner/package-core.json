@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "start": "npx turbo run start --parallel"
-  },
-  "workspaces": ["runner", "runner/cmd"],
-  "packageManager": "npm@9.6.6"
-}
