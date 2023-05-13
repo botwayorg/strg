@@ -50,7 +50,7 @@ if (options.watch) {
 if (options.sync) {
   CheckDir().then(async () => {
     const { result } = concurrently(
-      ["npm:watch-*", { command: "strg --cmd" }, { command: "strg --watch" }],
+      ["npm:watch-*", { command: "strg --cmd", name: "cmd" }, { command: "strg --watch", name: "watch" }],
       {
         prefix: "strg",
         killOthers: ["failure", "success"],

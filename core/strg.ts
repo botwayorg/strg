@@ -38,14 +38,14 @@ export const CheckDir = async () => {
         if (err) {
           console.error(err);
         } else {
-          console.log(`Directory '~/.${db}' created successfully!`);
+          console.log(`'~/.${db}' created successfully!`);
 
           shelljs.exec(`npx gh-cmd repo create ${"." + db} --private`);
           shelljs.exec(
             `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
           );
 
-          console.log(`Created on GitHub`);
+          console.log(`Created on GitHub `);
         }
       });
     } else {
@@ -53,11 +53,11 @@ export const CheckDir = async () => {
         `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
       );
 
-      console.log(`Cloned Successfully`);
+      console.log(`Cloned Successfully 📦`);
     }
   } else {
     shelljs.cd(join(HOMEDIR, "." + db)).exec(`git pull`);
 
-    console.log(`Directory found`);
+    console.log(`Directory found 👍`);
   }
 };
