@@ -1,4 +1,4 @@
-import * as shelljs from "shelljs";
+import shelljs from "shelljs";
 import { existsSync, mkdir } from "fs";
 import { join } from "path";
 import { HOMEDIR } from "./constants";
@@ -44,6 +44,12 @@ export const CheckDir = async () => {
           shelljs.exec(
             `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
           );
+          shelljs
+            .cd(join(HOMEDIR, "." + db))
+            .exec(`git lfs install`)
+            .exec("git lfs track *");
+
+          shelljs.rm(".gitattributes");
 
           console.log(`Created on GitHub `);
         }
@@ -52,6 +58,13 @@ export const CheckDir = async () => {
       shelljs.exec(
         `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
       );
+
+      shelljs
+        .cd(join(HOMEDIR, "." + db))
+        .exec(`git lfs install`)
+        .exec("git lfs track *");
+
+      shelljs.rm(".gitattributes");
 
       console.log(`Cloned Successfully 📦`);
     }

@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
-import * as figlet from "figlet";
+import figlet from "figlet";
 import { Command } from "commander";
 import { CheckDir } from "./strg";
 import { removeSync } from "fs-extra";
 import { HOMEDIR } from "./constants";
 import { join } from "path";
 import { Watch } from "./watch";
-import * as shelljs from "shelljs";
+import shelljs from "shelljs";
 import concurrently from "concurrently";
 
 const program = new Command();
@@ -50,9 +50,12 @@ if (options.watch) {
 if (options.sync) {
   CheckDir().then(async () => {
     const { result } = concurrently(
-      ["npm:watch-*", { command: "strg --cmd", name: "cmd" }, { command: "strg --watch", name: "watch" }],
+      [
+        "npm:watch-*",
+        { command: "strg --cmd", name: "cmd" },
+        { command: "strg --watch", name: "watch" },
+      ],
       {
-        prefix: "strg",
         killOthers: ["failure", "success"],
       }
     );

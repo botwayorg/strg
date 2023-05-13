@@ -1,4 +1,4 @@
-import * as shelljs from "shelljs";
+import shelljs from "shelljs";
 import { HOMEDIR } from "./constants";
 import { join } from "path";
 import { watch } from "fs";
