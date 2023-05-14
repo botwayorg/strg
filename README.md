@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:148f9bc58fc07342bad05494558af30ccb831a15e405684a46f9415a87e34647
-size 238
+# Strg
+
+> 📦 A persistent storage solution that syncs database files located in a Docker container under your GitHub account
+```bash
+npm i -g @botway/strg
+```
