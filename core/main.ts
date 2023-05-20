@@ -4,8 +4,6 @@ import figlet from "figlet";
 import { Command } from "commander";
 import { CheckDir } from "./strg";
 import { removeSync } from "fs-extra";
-import { HOMEDIR } from "./constants";
-import { join } from "path";
 import { Watch } from "./watch";
 import shelljs from "shelljs";
 import concurrently from "concurrently";
@@ -34,7 +32,7 @@ if (options.check) {
 }
 
 if (options.remove) {
-  removeSync(join(HOMEDIR, "." + options.remove));
+  removeSync(process.env.SG_DIR!);
 }
 
 if (options.cmd) {

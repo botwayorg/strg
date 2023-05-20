@@ -1,12 +1,8 @@
 import shelljs from "shelljs";
 import { existsSync, mkdir } from "fs";
-import { join } from "path";
-import { HOMEDIR } from "./constants";
 import axios from "axios";
 
 export const CheckDir = async () => {
-  const db = process.env.DB!;
-
   console.log("Checking Directory...");
 
   const ghu = (
@@ -18,10 +14,15 @@ export const CheckDir = async () => {
   ).data;
 
   const repo = shelljs
-    .exec(`npx gh-cmd api repos/${ghu.login}/${"." + db}`, { silent: true })
+    .exec(
+      `npx gh-cmd api repos/${ghu.login}/${process.env
+        .SG_DIR!.split("/")
+        .join("_")}`,
+      { silent: true }
+    )
     .toString();
 
-  let check = existsSync(join(HOMEDIR, "." + db));
+  let check = existsSync(process.env.SG_DIR!);
 
   shelljs
     .exec(`npx gh-cmd auth setup-git`)
@@ -34,18 +35,26 @@ export const CheckDir = async () => {
 
   if (!check) {
     if (repo.includes("Not Found")) {
-      mkdir(join(HOMEDIR, "." + db), async (err) => {
+      mkdir(process.env.SG_DIR!, async (err) => {
         if (err) {
           console.error(err);
         } else {
-          console.log(`'~/.${db}' created successfully!`);
+          console.log(`'${process.env.SG_DIR!}' created successfully!`);
 
-          shelljs.exec(`npx gh-cmd repo create ${"." + db} --private`);
           shelljs.exec(
-            `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
+            `npx gh-cmd repo create ${process.env
+              .SG_DIR!.split("/")
+              .join("_")} --private`
           );
+
+          shelljs.exec(
+            `npx gh-cmd repo clone ${process.env
+              .SG_DIR!.split("/")
+              .join("_")} ${process.env.SG_DIR!}`
+          );
+
           shelljs
-            .cd(join(HOMEDIR, "." + db))
+            .cd(process.env.SG_DIR!)
             .exec(`git lfs install`)
             .exec("git lfs track *");
 
@@ -56,11 +65,14 @@ export const CheckDir = async () => {
       });
     } else {
       shelljs.exec(
-        `npx gh-cmd repo clone ${"." + db} ${join(HOMEDIR, "." + db)}`
+        `npx gh-cmd repo clone ${process.env.SG_DIR!.replace(
+          "/",
+          "-"
+        )} ${process.env.SG_DIR!}`
       );
 
       shelljs
-        .cd(join(HOMEDIR, "." + db))
+        .cd(process.env.SG_DIR!)
         .exec(`git lfs install`)
         .exec("git lfs track *");
 
@@ -69,7 +81,7 @@ export const CheckDir = async () => {
       console.log(`Cloned Successfully 📦`);
     }
   } else {
-    shelljs.cd(join(HOMEDIR, "." + db)).exec(`git pull`);
+    shelljs.cd(process.env.SG_DIR!).exec(`git pull`);
 
     console.log(`Directory found 👍`);
   }
