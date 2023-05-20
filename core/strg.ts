@@ -65,10 +65,9 @@ export const CheckDir = async () => {
       });
     } else {
       shelljs.exec(
-        `npx gh-cmd repo clone ${process.env.SG_DIR!.replace(
-          "/",
-          "-"
-        )} ${process.env.SG_DIR!}`
+        `npx gh-cmd repo clone ${process.env
+          .SG_DIR!.split("/")
+          .join("_")} ${process.env.SG_DIR!}`
       );
 
       shelljs
