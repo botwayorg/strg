@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d2c503db45a29920e0dd093b9ccd6e32eb573f6ad99183ce4c4f6fc352671916
-size 419
+{
+  "compilerOptions": {
+    "declaration": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "outDir": "bin",
+    "rootDirs": ["core"],
+    "strict": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "lib": ["es2017", "dom"],
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "include": ["core/**/*"],
+  "exclude": ["node_modules"]
+}

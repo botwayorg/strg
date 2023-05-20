@@ -1,6 +1,7 @@
 import shelljs from "shelljs";
 import { existsSync, mkdir } from "fs";
 import axios from "axios";
+import { join } from "path";
 
 export const CheckDir = async () => {
   console.log("Checking Directory...");
@@ -33,6 +34,14 @@ export const CheckDir = async () => {
     .exec(`git config --global init.defaultBranch main`)
     .exec(`git config --global pull.ff only`);
 
+  if (repo.includes("Not Found")) {
+    shelljs.exec(
+      `npx gh-cmd repo create ${process.env
+        .SG_DIR!.split("/")
+        .join("_")} --private`
+    );
+  }
+
   if (!check) {
     if (repo.includes("Not Found")) {
       mkdir(process.env.SG_DIR!, async (err) => {
@@ -40,12 +49,6 @@ export const CheckDir = async () => {
           console.error(err);
         } else {
           console.log(`'${process.env.SG_DIR!}' created successfully!`);
-
-          shelljs.exec(
-            `npx gh-cmd repo create ${process.env
-              .SG_DIR!.split("/")
-              .join("_")} --private`
-          );
 
           shelljs.exec(
             `npx gh-cmd repo clone ${process.env
@@ -80,6 +83,23 @@ export const CheckDir = async () => {
       console.log(`Cloned Successfully 📦`);
     }
   } else {
+    if (!existsSync(join(process.env.SG_DIR!, ".git"))) {
+      shelljs.cd(process.env.SG_DIR!).exec("rm -rf *");
+
+      shelljs.exec(
+        `npx gh-cmd repo clone ${process.env
+          .SG_DIR!.split("/")
+          .join("_")} ${process.env.SG_DIR!}`
+      );
+
+      shelljs
+        .cd(process.env.SG_DIR!)
+        .exec(`git lfs install`)
+        .exec("git lfs track *");
+
+      shelljs.rm(".gitattributes");
+    }
+
     shelljs.cd(process.env.SG_DIR!).exec(`git pull`);
 
     console.log(`Directory found 👍`);
