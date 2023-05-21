@@ -2,6 +2,7 @@ import shelljs from "shelljs";
 import { existsSync, mkdir } from "fs";
 import axios from "axios";
 import { join } from "path";
+import { exit } from "process";
 
 export const CheckDir = async () => {
   console.log("Checking Directory...");
@@ -13,6 +14,12 @@ export const CheckDir = async () => {
       },
     })
   ).data;
+
+  if (!ghu) {
+    console.error("No User");
+
+    exit(0);
+  }
 
   const repo = shelljs
     .exec(
